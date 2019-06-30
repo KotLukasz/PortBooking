@@ -4,21 +4,12 @@
 
 <form:form method="post" modelAttribute="user">
     First Name <form:input path="firstName"/>
-
     <br/>
     Last Name <form:input path="lastName"/>
-
     <br/>
-
     Email <form:input path="email"/>
-
     <br/>
-
     Password <form:input path="password"/>
-
     <br/>
-
     <input type="submit" value="Add User"/>
-
-
 </form:form>

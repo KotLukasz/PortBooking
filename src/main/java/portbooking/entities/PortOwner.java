@@ -23,9 +23,7 @@ public class PortOwner {
 
 	private LocalDateTime createdOn;
 
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn
+	@OneToMany(mappedBy = "portOwner", cascade = CascadeType.REMOVE)
 	private List<Port> ports = new ArrayList<>();
 
 	@PrePersist
@@ -85,4 +83,9 @@ public class PortOwner {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
+
 }

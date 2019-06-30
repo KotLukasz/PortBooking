@@ -69,5 +69,8 @@ public class User {
 		this.password = password;
 	}
 
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
 
 }

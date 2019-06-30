@@ -22,7 +22,6 @@ public class Port {
 
 	private LocalDateTime createdOn;
 
-
 	@ManyToOne
 	private PortOwner portOwner;
 
@@ -30,7 +29,6 @@ public class Port {
 	public void prePersist() {
 		createdOn = LocalDateTime.now();
 	}
-
 
 	public Port() {
 	}

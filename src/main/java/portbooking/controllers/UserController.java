@@ -43,13 +43,13 @@ public class UserController {
 	public String saveEditedUser(@ModelAttribute User user, @PathVariable Long id, Model model) {
 		userRepository.updateUserSetFirstNameAndLastNameAndEmailAndPassword(id, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
 		model.addAttribute("id", id);
-		return "user/editSuccessUser";
+		return "redirect:/user/accountUser/" + id;
 	}
 
 	@GetMapping("delete/{id}")
 	public String editUser(@PathVariable Long id) {
 		userRepository.delete(id);
-		return "user/deleteUser";
+		return "index";
 	}
 
 }

@@ -43,13 +43,13 @@ public class PortOwnerController {
 	public String saveEditedPortOwner(@ModelAttribute PortOwner portOwner, @PathVariable Long id, Model model) {
 		portOwnerRepository.updateUserSetFirstNameAndLastNameAndEmailAndPassword(id, portOwner.getFirstName(), portOwner.getLastName(), portOwner.getEmail(), portOwner.getPassword());
 		model.addAttribute("id", id);
-		return "portOwner/editSuccessPortOwner";
+		return "redirect:/portOwner/accountPortOwner/" + id;
 	}
 
 	@GetMapping("delete/{id}")
 	public String editPortOwner(@PathVariable Long id) {
 		portOwnerRepository.delete(id);
-		return "portOwner/deletePortOwner";
+		return "index";
 	}
 
 }

@@ -11,6 +11,7 @@ Email: ${portOwner.email} <br/>
 <td>
     <a href="http://localhost:8080/PortBooking_war_exploded/portOwner/edit/${portOwner.id}">Edit Account</a> <br/>
     <a href="http://localhost:8080/PortBooking_war_exploded/portOwner/delete/${portOwner.id}">Delete Account</a> <br/>
-    <a href="http://localhost:8080/PortBooking_war_exploded/portOwner/showMyPorts">Show My Ports</a> <br/>
-    <a href="http://localhost:8080/PortBooking_war_exploded/portOwner/addPort">Add Port</a></td>
+    <a href="http://localhost:8080/PortBooking_war_exploded/port/showPorts/${portOwner.id}">Show My Ports</a> <br/>
+    <a href="http://localhost:8080/PortBooking_war_exploded/port/addPort/${portOwner.id}">Add Port</a> <br/>
+    <a href="http://localhost:8080/PortBooking_war_exploded/">Log Out</a></td>
 </tr>
