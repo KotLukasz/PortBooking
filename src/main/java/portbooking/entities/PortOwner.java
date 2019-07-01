@@ -1,6 +1,12 @@
 package portbooking.entities;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+import portbooking.authentication.UniqueEmailPortOwner;
+
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +19,20 @@ public class PortOwner {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotEmpty
+	@Size(min = 2, max = 30)
 	private String firstName;
 
+	@NotEmpty
+	@Size(min = 2, max = 30)
 	private String lastName;
 
+	@UniqueEmailPortOwner
+	@Email
+	@NotEmpty
 	private String email;
 
+	@NotEmpty
 	private String password;
 
 	private LocalDateTime createdOn;

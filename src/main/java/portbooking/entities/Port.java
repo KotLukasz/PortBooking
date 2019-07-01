@@ -1,7 +1,10 @@
 package portbooking.entities;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,16 +15,24 @@ public class Port {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotEmpty
+	@Size(min = 2, max = 30)
 	private String portName;
 
+	@NotEmpty
+	@Size(min = 2, max = 30)
 	private String lake;
 
+	@NotNull
+	@Min(value = 1)
 	private int space;
 
+	@NotEmpty
 	private String description;
 
 	private LocalDateTime createdOn;
 
+	@NotNull
 	@ManyToOne
 	private PortOwner portOwner;
 

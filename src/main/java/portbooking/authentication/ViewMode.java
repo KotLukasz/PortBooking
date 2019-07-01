@@ -1,9 +1,14 @@
 package portbooking.authentication;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class ViewMode {
 
+	@Email
 	private String email;
 
+	@NotEmpty
 	private String password;
 
 	public String getEmail() {

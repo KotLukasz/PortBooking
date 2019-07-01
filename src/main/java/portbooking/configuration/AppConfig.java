@@ -72,11 +72,11 @@ public class AppConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
-		registry.addConverter(getUserConverter());
+		registry.addConverter(getPortOwnerConverter());
 	}
 
 	@Bean
-	public PortOwnerConverter getUserConverter() {
+	public PortOwnerConverter getPortOwnerConverter() {
 		return new PortOwnerConverter();
 	}
 

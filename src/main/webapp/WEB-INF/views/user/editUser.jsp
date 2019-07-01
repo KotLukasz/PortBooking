@@ -10,12 +10,16 @@
 <button onclick="goBack()">Go Back</button>
 
 <form:form method="post" modelAttribute="user">
+    <form:errors path="firstName" />
     First Name <form:input path="firstName"/>
     <br/>
+    <form:errors path="lastName" />
     Last Name <form:input path="lastName"/>
     <br/>
+    <form:errors path="email" />
     Email <form:input path="email"/>
     <br/>
+    <form:errors path="password" />
     Password <form:password path="password"/>
     <br/>
     <input type="submit" value="Update"/>

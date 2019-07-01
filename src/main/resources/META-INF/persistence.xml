@@ -12,6 +12,7 @@
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.schema-generation.database.action"
                       value="none"/>
+            <property name="javax.persistence.validation.mode" value="none"/>
             <property name="hibernate.dialect"
                       value="org.hibernate.dialect.MySQL57Dialect" />
             <property name="hibernate.connection.characterEncoding" value="utf8" />

@@ -18,4 +18,6 @@ public interface PortOwnerRepository extends JpaRepository<PortOwner, Long> {
 
 	PortOwner findByEmail(String email);
 
+	boolean existsByEmail(String email);
+
 }

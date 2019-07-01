@@ -3,11 +3,14 @@ package portbooking.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import portbooking.entities.Port;
-import portbooking.entities.User;
 import portbooking.repository.PortOwnerRepository;
 import portbooking.repository.PortRepository;
+
+import javax.validation.Valid;
+import javax.validation.Validator;
 
 @Controller
 @RequestMapping("/port")
@@ -19,6 +22,9 @@ public class PortController {
 	@Autowired
 	private PortRepository portRepository;
 
+	@Autowired
+	Validator validator;
+
 	@GetMapping("/addPort/{id}")
 	public String addPort(Model model, @PathVariable long id) {
 		model.addAttribute("port", new Port());
@@ -27,8 +33,11 @@ public class PortController {
 	}
 
 	@PostMapping("/addPort/{id}")
-	public String savePort(@ModelAttribute Port port) {
-
+	public String savePort(@ModelAttribute("port") @Valid Port port, BindingResult result, @PathVariable long id, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("owner", portOwnerRepository.findOne(id));
+			return "port/addPort";
+		}
 		portRepository.save(port);
 		return "redirect:/portOwner/accountPortOwner/" + port.getPortOwner().getId();
 	}
@@ -42,12 +51,16 @@ public class PortController {
 	@GetMapping("/editPort/{id}/{portOwnerId}")
 	public String editPort(Model model, @PathVariable Long id, @PathVariable Long portOwnerId) {
 		model.addAttribute("port", portRepository.findOne(id));
-		model.addAttribute("poertOwner", portOwnerRepository.findOne(portOwnerId));
+		model.addAttribute("owner", portOwnerRepository.findOne(portOwnerId));
 		return "port/editPort";
 	}
 
 	@PostMapping("/editPort/{id}/{portOwnerId}")
-	public String saveEditedPort(@ModelAttribute Port port, @PathVariable Long id, @PathVariable Long portOwnerId) {
+	public String saveEditedPort(@ModelAttribute("port") @Valid Port port, BindingResult result, @PathVariable Long id, @PathVariable Long portOwnerId, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("owner", portOwnerRepository.findOne(portOwnerId));
+			return "port/editPort";
+		}
 		portRepository.updateUserSetFirstNameAndLastNameAndEmailAndPassword(id, port.getPortName(), port.getLake(), port.getSpace(), port.getDescription());
 		return "redirect:/portOwner/accountPortOwner/" + portOwnerId;
 	}

@@ -4,9 +4,13 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import portbooking.entities.PortOwner;
 import portbooking.repository.PortOwnerRepository;
+
+import javax.validation.Valid;
+import javax.validation.Validator;
 
 
 @Controller
@@ -16,6 +20,9 @@ public class PortOwnerController {
 	@Autowired
 	private PortOwnerRepository portOwnerRepository;
 
+	@Autowired
+	Validator validator;
+
 	@GetMapping("/add")
 	public String addPortOwner(Model model) {
 		model.addAttribute("portOwner", new PortOwner());
@@ -23,7 +30,10 @@ public class PortOwnerController {
 	}
 
 	@PostMapping("/add")
-	public String savePortOwner(@ModelAttribute PortOwner portOwner) {
+	public String savePortOwner(@ModelAttribute("portOwner") @Valid PortOwner portOwner, BindingResult result) {
+		if (result.hasErrors()) {
+			return "portOwner/addPortOwner";
+		}
 		String hashedPassword = BCrypt.hashpw(portOwner.getPassword(), BCrypt.gensalt());
 		portOwner.setPassword(hashedPassword);
 		portOwnerRepository.save(portOwner);
@@ -43,7 +53,10 @@ public class PortOwnerController {
 	}
 
 	@PostMapping("edit/{id}")
-	public String saveEditedPortOwner(@ModelAttribute PortOwner portOwner, @PathVariable Long id) {
+	public String saveEditedPortOwner(@ModelAttribute("portOwner") @Valid PortOwner portOwner, BindingResult result, @PathVariable Long id) {
+		if (result.hasErrors()) {
+			return "portOwner/addPortOwner";
+		}
 		String hashedPassword = BCrypt.hashpw(portOwner.getPassword(), BCrypt.gensalt());
 		portOwner.setPassword(hashedPassword);
 		portOwnerRepository.updateUserSetFirstNameAndLastNameAndEmailAndPassword(id, portOwner.getFirstName(), portOwner.getLastName(), portOwner.getEmail(), portOwner.getPassword());
