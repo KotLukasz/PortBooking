@@ -2,6 +2,13 @@
 <%@ taglib prefix="form"
            uri="http://www.springframework.org/tags/form" %>
 
+<script>
+    function goBack() {
+        window.history.back()
+    }
+</script>
+<button onclick="goBack()">Go Back</button>
+
 <form:form method="post" modelAttribute="port">
     Port Name <form:input path="portName"/>
     <br/>

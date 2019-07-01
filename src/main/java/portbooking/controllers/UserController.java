@@ -1,5 +1,6 @@
 package portbooking.controllers;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,8 @@ public class UserController {
 
 	@PostMapping("/add")
 	public String saveUser(@ModelAttribute User user) {
+		String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+		user.setPassword(hashedPassword);
 		userRepository.save(user);
 		return "redirect:accountUser/" + user.getId();
 	}
@@ -40,9 +43,10 @@ public class UserController {
 	}
 
 	@PostMapping("edit/{id}")
-	public String saveEditedUser(@ModelAttribute User user, @PathVariable Long id, Model model) {
+	public String saveEditedUser(@ModelAttribute User user, @PathVariable Long id) {
+		String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+		user.setPassword(hashedPassword);
 		userRepository.updateUserSetFirstNameAndLastNameAndEmailAndPassword(id, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
-		model.addAttribute("id", id);
 		return "redirect:/user/accountUser/" + id;
 	}
 

@@ -16,4 +16,6 @@ public interface PortOwnerRepository extends JpaRepository<PortOwner, Long> {
 	@Query("Update PortOwner u set u.firstName = :firstName, u.lastName =:lastName, u.email = :email, u.password =:password where u.id = :id")
 	void updateUserSetFirstNameAndLastNameAndEmailAndPassword(@Param("id") Long id, @Param("firstName") String firstName, @Param("lastName") String lastName, @Param("email") String email, @Param("password") String password);
 
+	PortOwner findByEmail(String email);
+
 }

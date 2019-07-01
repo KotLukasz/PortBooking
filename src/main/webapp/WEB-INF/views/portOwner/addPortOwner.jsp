@@ -2,6 +2,13 @@
 <%@ taglib prefix="form"
            uri="http://www.springframework.org/tags/form" %>
 
+<script>
+    function goBack() {
+        window.history.back()
+    }
+</script>
+<button onclick="goBack()">Go Back</button>
+
 <form:form method="post" modelAttribute="portOwner">
     First Name <form:input path="firstName"/>
     <br/>
@@ -9,7 +16,7 @@
     <br/>
     Email <form:input path="email"/>
     <br/>
-    Password <form:input path="password"/>
+    Password <form:password path="password"/>
     <br/>
     <input type="submit" value="Add Port Owner"/>
 </form:form>
