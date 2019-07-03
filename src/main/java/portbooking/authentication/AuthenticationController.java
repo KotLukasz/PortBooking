@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import portbooking.entities.PortOwner;
 import portbooking.entities.User;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/authentication")
 public class AuthenticationController {
@@ -21,7 +23,7 @@ public class AuthenticationController {
 	@GetMapping("/loginUser")
 	public String loginUser(Model model) {
 		model.addAttribute("viewMode", new ViewMode());
-		return "authentication/loginUser";
+		return "authentication/login";
 	}
 
 
@@ -33,14 +35,14 @@ public class AuthenticationController {
 				return "redirect:/user/accountUser/" + user.getId();
 			}
 		}
-		return "authentication/loginUser";
+		return "authentication/incorrectLoginOrPassword";
 	}
 
 
 	@GetMapping("/loginPortOwner")
 	public String loginPortOwner(Model model) {
 		model.addAttribute("viewMode", new ViewMode());
-		return "authentication/loginPortOwner";
+		return "authentication/login";
 	}
 
 
@@ -52,7 +54,7 @@ public class AuthenticationController {
 				return "redirect:/portOwner/accountPortOwner/" + portOwner.getId();
 			}
 		}
-		return "authentication/loginPortOwner";
+		return "authentication/incorrectLoginOrPassword";
 	}
 
 
