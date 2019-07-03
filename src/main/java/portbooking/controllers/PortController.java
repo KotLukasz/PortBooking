@@ -29,14 +29,14 @@ public class PortController {
 	public String addPort(Model model, @PathVariable long id) {
 		model.addAttribute("port", new Port());
 		model.addAttribute("owner", portOwnerRepository.findOne(id));
-		return "port/addPort";
+		return "port/addOrEditPort";
 	}
 
 	@PostMapping("/addPort/{id}")
 	public String savePort(@ModelAttribute("port") @Valid Port port, BindingResult result, @PathVariable long id, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("owner", portOwnerRepository.findOne(id));
-			return "port/addPort";
+			return "port/addOrEditPort";
 		}
 		portRepository.save(port);
 		return "redirect:/portOwner/accountPortOwner/" + port.getPortOwner().getId();
@@ -52,14 +52,14 @@ public class PortController {
 	public String editPort(Model model, @PathVariable Long id, @PathVariable Long portOwnerId) {
 		model.addAttribute("port", portRepository.findOne(id));
 		model.addAttribute("owner", portOwnerRepository.findOne(portOwnerId));
-		return "port/editPort";
+		return "port/addOrEditPort";
 	}
 
 	@PostMapping("/editPort/{id}/{portOwnerId}")
 	public String saveEditedPort(@ModelAttribute("port") @Valid Port port, BindingResult result, @PathVariable Long id, @PathVariable Long portOwnerId, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("owner", portOwnerRepository.findOne(portOwnerId));
-			return "port/editPort";
+			return "port/addOrEditPort";
 		}
 		portRepository.updateUserSetFirstNameAndLastNameAndEmailAndPassword(id, port.getPortName(), port.getLake(), port.getSpace(), port.getDescription());
 		return "redirect:/portOwner/accountPortOwner/" + portOwnerId;

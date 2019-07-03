@@ -26,13 +26,13 @@ public class PortOwnerController {
 	@GetMapping("/add")
 	public String addPortOwner(Model model) {
 		model.addAttribute("portOwner", new PortOwner());
-		return "portOwner/addPortOwner";
+		return "portOwner/addOrEditPortOwner";
 	}
 
 	@PostMapping("/add")
 	public String savePortOwner(@ModelAttribute("portOwner") @Valid PortOwner portOwner, BindingResult result) {
 		if (result.hasErrors()) {
-			return "portOwner/addPortOwner";
+			return "portOwner/addOrEditPortOwner";
 		}
 		String hashedPassword = BCrypt.hashpw(portOwner.getPassword(), BCrypt.gensalt());
 		portOwner.setPassword(hashedPassword);
@@ -49,13 +49,13 @@ public class PortOwnerController {
 	@GetMapping("edit/{id}")
 	public String editPortOwner(Model model, @PathVariable Long id) {
 		model.addAttribute(portOwnerRepository.findOne(id));
-		return "portOwner/editPortOwner";
+		return "portOwner/addOrEditPortOwner";
 	}
 
 	@PostMapping("edit/{id}")
 	public String saveEditedPortOwner(@ModelAttribute("portOwner") @Valid PortOwner portOwner, BindingResult result, @PathVariable Long id) {
 		if (result.hasErrors()) {
-			return "portOwner/addPortOwner";
+			return "portOwner/addOrEditPortOwner";
 		}
 		String hashedPassword = BCrypt.hashpw(portOwner.getPassword(), BCrypt.gensalt());
 		portOwner.setPassword(hashedPassword);

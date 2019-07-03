@@ -27,5 +27,5 @@
     <input value="${owner.fullName}" readonly/>
     <form:input path="portOwner" value="${owner.id}" type="hidden"/>
     <br/>
-    <input type="submit" value="Add Port"/>
+    <input type="submit" value="Save"/>
 </form:form>

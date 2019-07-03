@@ -26,13 +26,13 @@ public class UserController {
 	@GetMapping("/add")
 	public String addUser(Model model) {
 		model.addAttribute("user", new User());
-		return "user/addUser";
+		return "user/addOrEditUser";
 	}
 
 	@PostMapping("/add")
 	public String saveUser(@ModelAttribute("user") @Valid  User user, BindingResult result) {
 		if (result.hasErrors()) {
-			return "user/addUser";
+			return "user/addOrEditUser";
 		}
 		String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 		user.setPassword(hashedPassword);
@@ -49,13 +49,13 @@ public class UserController {
 	@GetMapping("edit/{id}")
 	public String editUser(Model model, @PathVariable Long id) {
 		model.addAttribute(userRepository.findOne(id));
-		return "user/editUser";
+		return "user/addOrEditUser";
 	}
 
 	@PostMapping("edit/{id}")
 	public String saveEditedUser(@ModelAttribute("user") @Valid User user, BindingResult result, @PathVariable Long id) {
 		if (result.hasErrors()) {
-			return "user/editUser";
+			return "user/addOrEditUser";
 		}
 		String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 		user.setPassword(hashedPassword);

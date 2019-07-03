@@ -22,5 +22,5 @@
     <form:errors path="password" />
     Password <form:password path="password"/>
     <br/>
-    <input type="submit" value="Add User"/>
+    <input type="submit" value="Save"/>
 </form:form>
