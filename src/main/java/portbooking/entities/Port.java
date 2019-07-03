@@ -23,8 +23,8 @@ public class Port {
 	@Size(min = 2, max = 30)
 	private String lake;
 
-	@NotNull
 	@Min(value = 1)
+	@NotNull
 	private int space;
 
 	@NotEmpty
@@ -92,4 +92,6 @@ public class Port {
 	public void setPortOwner(PortOwner portOwner) {
 		this.portOwner = portOwner;
 	}
+
+
 }

@@ -71,5 +71,13 @@ public class PortController {
 		return "redirect:/portOwner/accountPortOwner/" + portOwnerId;
 	}
 
+	@ModelAttribute("spaceToChoose")
+	public int[] spaceToChoose() {
+		int[] spaceArray = new int[100];
+		for (int i = 0; i < spaceArray.length;i++) {
+			spaceArray[i] = i;
+		}
+		return spaceArray;
+	}
 
 }

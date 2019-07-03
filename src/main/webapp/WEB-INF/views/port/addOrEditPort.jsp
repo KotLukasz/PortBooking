@@ -17,10 +17,13 @@
     Lake <form:input path="lake"/>
     <br/>
     <form:errors path="space" />
-    Available space for booking <form:input path="space"/>
+    Available space for booking
+    <form:select path="space">
+    <form:options items="${spaceToChoose}"/>
+    </form:select>
     <br/>
     <form:errors path="description" />
-    Port Description <form:input path="description"/>
+    Port Description <form:textarea rows="4" cols="15" path="description"/>
     <br/>
     Port Owner
     <br/>
