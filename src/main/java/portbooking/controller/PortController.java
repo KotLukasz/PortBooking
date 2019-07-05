@@ -1,11 +1,11 @@
-package portbooking.controllers;
+package portbooking.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import portbooking.entities.Port;
+import portbooking.entity.Port;
 import portbooking.repository.PortOwnerRepository;
 import portbooking.repository.PortRepository;
 

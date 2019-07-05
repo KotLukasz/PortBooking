@@ -1,4 +1,4 @@
-package portbooking.entities;
+package portbooking.entity;
 
 
 import org.hibernate.validator.constraints.NotEmpty;

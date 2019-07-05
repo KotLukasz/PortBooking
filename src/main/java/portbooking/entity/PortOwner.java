@@ -1,16 +1,20 @@
-package portbooking.entities;
+package portbooking.entity;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import portbooking.authentication.UniqueEmailUser;
+import portbooking.authentication.UniqueEmailPortOwner;
+
+
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "portOwners")
+public class PortOwner {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +28,7 @@ public class User {
 	@Size(min = 2, max = 30)
 	private String lastName;
 
-	@UniqueEmailUser
+	@UniqueEmailPortOwner
 	@Email
 	@NotEmpty
 	private String email;
@@ -34,12 +38,16 @@ public class User {
 
 	private LocalDateTime createdOn;
 
+	@OneToMany(mappedBy = "portOwner", cascade = CascadeType.REMOVE)
+	private List<Port> ports = new ArrayList<>();
+
 	@PrePersist
 	public void prePersist() {
 		createdOn = LocalDateTime.now();
 	}
 
-	public User() {
+
+	public PortOwner() {
 	}
 
 	public Long getId() {
@@ -72,6 +80,15 @@ public class User {
 
 	public LocalDateTime getCreatedOn() {
 		return createdOn;
+	}
+
+
+	public List<Port> getPorts() {
+		return ports;
+	}
+
+	public void setPorts(List<Port> ports) {
+		this.ports = ports;
 	}
 
 	public String getPassword() {

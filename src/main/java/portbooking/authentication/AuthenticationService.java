@@ -3,8 +3,8 @@ package portbooking.authentication;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import portbooking.entities.PortOwner;
-import portbooking.entities.User;
+import portbooking.entity.PortOwner;
+import portbooking.entity.User;
 import portbooking.repository.PortOwnerRepository;
 import portbooking.repository.UserRepository;
 

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import portbooking.convertes.PortOwnerConverter;
+import portbooking.converter.PortOwnerConverter;
 
 import javax.persistence.EntityManagerFactory;
 import javax.validation.Validator;

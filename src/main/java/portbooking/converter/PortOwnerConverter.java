@@ -1,9 +1,9 @@
-package portbooking.convertes;
+package portbooking.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import portbooking.entities.PortOwner;
+import portbooking.entity.PortOwner;
 import portbooking.repository.PortOwnerRepository;
 
 
