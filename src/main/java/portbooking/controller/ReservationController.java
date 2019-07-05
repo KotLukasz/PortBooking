@@ -46,14 +46,14 @@ public class ReservationController {
 	public String makeReservation(Model model, @PathVariable Long portId, @PathVariable Long userId) {
 		model.addAttribute("reservation", new Reservation());
 		model.addAttribute("port", portRepository.findOne(portId));
-		model.addAttribute("user", userRepository.findOne(userId));
 		model.addAttribute("spaceLeft", spaceToChoose(portId));
 		return "reservation/makeReservation";
 	}
 
 	@PostMapping("/makeReservation/{portId}/{userId}")
-	public String makeReservation(@ModelAttribute @Valid Reservation reservation, BindingResult result, @PathVariable Long portId, @PathVariable Long userId) {
+	public String makeReservation(@ModelAttribute @Valid Reservation reservation, BindingResult result, @PathVariable Long portId, @PathVariable Long userId, Model model) {
 		if (result.hasErrors()) {
+			model.addAttribute("port", portRepository.findOne(portId));
 			return "reservation/makeReservation";
 		}
 		reservation.setPortReservation(portRepository.findOne(portId));
