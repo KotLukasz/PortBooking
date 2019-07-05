@@ -1,7 +1,5 @@
 package portbooking.authentication;
 
-import javax.validation.constraints.NotNull;
-
 public class ViewMode {
 
 	private String email;

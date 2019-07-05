@@ -7,6 +7,8 @@ import portbooking.authentication.UniqueEmailUser;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -33,6 +35,9 @@ public class User {
 	private String password;
 
 	private LocalDateTime createdOn;
+
+	@OneToMany(mappedBy = "userReservation", cascade = CascadeType.REMOVE)
+	private List<Reservation> reservation = new ArrayList<>();
 
 	@PrePersist
 	public void prePersist() {
@@ -86,4 +91,11 @@ public class User {
 		return firstName + " " + lastName;
 	}
 
+	public List<Reservation> getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(List<Reservation> reservation) {
+		this.reservation = reservation;
+	}
 }

@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ports")
@@ -30,11 +32,16 @@ public class Port {
 	@NotEmpty
 	private String description;
 
+	private int spaceLeftToReserve;
+
 	private LocalDateTime createdOn;
 
 	@NotNull
 	@ManyToOne
 	private PortOwner portOwner;
+
+	@OneToMany(mappedBy = "portReservation", cascade = CascadeType.REMOVE)
+	private List<Reservation> reservation = new ArrayList<>();
 
 	@PrePersist
 	public void prePersist() {
@@ -84,6 +91,13 @@ public class Port {
 		return createdOn;
 	}
 
+	public int getSpaceLeftToReserve() {
+		return spaceLeftToReserve;
+	}
+
+	public void setSpaceLeftToReserve(int spaceLeftToReserve) {
+		this.spaceLeftToReserve = spaceLeftToReserve;
+	}
 
 	public PortOwner getPortOwner() {
 		return portOwner;
@@ -93,5 +107,11 @@ public class Port {
 		this.portOwner = portOwner;
 	}
 
+	public List<Reservation> getReservation() {
+		return reservation;
+	}
 
+	public void setReservation(List<Reservation> reservation) {
+		this.reservation = reservation;
+	}
 }

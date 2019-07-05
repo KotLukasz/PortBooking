@@ -38,12 +38,13 @@ public class PortController {
 			model.addAttribute("owner", portOwnerRepository.findOne(id));
 			return "port/addOrEditPort";
 		}
+		port.setSpaceLeftToReserve(port.getSpace());
 		portRepository.save(port);
 		return "redirect:/portOwner/accountPortOwner/" + port.getPortOwner().getId();
 	}
 
 	@GetMapping("/showPorts/{id}")
-	public String getTweetsStartingWith(Model model, @PathVariable Long id) {
+	public String showPortsById(Model model, @PathVariable Long id) {
 		model.addAttribute("ports", portRepository.findPortsByPortOwner_Id(id));
 		return "port/showPorts";
 	}
@@ -61,7 +62,8 @@ public class PortController {
 			model.addAttribute("owner", portOwnerRepository.findOne(portOwnerId));
 			return "port/addOrEditPort";
 		}
-		portRepository.updateUserSetFirstNameAndLastNameAndEmailAndPassword(id, port.getPortName(), port.getLake(), port.getSpace(), port.getDescription());
+		port.setSpaceLeftToReserve(port.getSpace());
+		portRepository.updatePortSetFirstNameAndLastNameAndEmailAndPassword(id, port.getPortName(), port.getLake(), port.getSpace(), port.getSpaceLeftToReserve() ,port.getDescription());
 		return "redirect:/portOwner/accountPortOwner/" + portOwnerId;
 	}
 
