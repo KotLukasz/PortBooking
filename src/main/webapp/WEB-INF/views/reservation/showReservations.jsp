@@ -15,6 +15,8 @@
         <th>Reserved Space</th>
         <th>Description</th>
         <th>Reserved by</th>
+        <th>Date of Reservation</th>
+        <th>Action</th>
     </tr>
     <c:forEach items="${reservation}" var="temp">
         <tr>
@@ -23,6 +25,8 @@
             <td>${temp.reservedSpace}</td>
             <td>${temp.portReservation.description}</td>
             <td>${temp.userReservation.fullName}</td>
+            <td>${temp.reservedDate}</td>
+            <td><a href="http://localhost:8080/PortBooking_war_exploded/reservation/deleteReservation/${temp.id}/${temp.userReservation.id}/${temp.portReservation.id}">Delete Reservation</a>
         </tr>
     </c:forEach>
 </table>

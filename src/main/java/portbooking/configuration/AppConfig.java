@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import portbooking.converter.PortConverter;
 import portbooking.converter.PortOwnerConverter;
 
 import javax.persistence.EntityManagerFactory;
@@ -36,6 +37,7 @@ public class AppConfig implements WebMvcConfigurer {
 				new InternalResourceViewResolver();
 		viewResolver.setPrefix("/WEB-INF/views/");
 		viewResolver.setSuffix(".jsp");
+		viewResolver.setContentType("text/html;charset=UTF-8");
 		return viewResolver;
 	}
 
@@ -73,11 +75,18 @@ public class AppConfig implements WebMvcConfigurer {
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(getPortOwnerConverter());
+		registry.addConverter(getPortConverter());
 	}
 
 	@Bean
 	public PortOwnerConverter getPortOwnerConverter() {
 		return new PortOwnerConverter();
 	}
+
+	@Bean
+	public PortConverter getPortConverter() {
+		return new PortConverter();
+	}
+
 
 }

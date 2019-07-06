@@ -13,6 +13,7 @@
         <th>Port Name</th>
         <th>Space Left</th>
         <th>Choose Space to Reserve</th>
+        <th>Date</th>
         <th>Action</th>
     </tr>
     <tr>
@@ -22,15 +23,18 @@
         </td>
         <td>
             <form:form method="post" modelAttribute="reservation">
-                <form:errors path="reservedSpace" />
             <form:select path="reservedSpace">
-
                 <form:options items="${spaceLeft}"/>
             </form:select>
         </td>
+        <td>
+        <form:errors path="reservedDate"/>
+         <form:input path="reservedDate" value = "${date}" readonly="true"/></td>
         <td>
             <input type="submit" value="Save"/>
         </td>
         </form:form>
     </tr>
+
+
 </table>

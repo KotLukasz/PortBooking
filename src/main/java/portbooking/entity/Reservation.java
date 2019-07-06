@@ -1,9 +1,11 @@
 package portbooking.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
+import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "reservation")
@@ -14,7 +16,6 @@ public class Reservation {
 	private Long id;
 
 	@Min(value = 1)
-	@NotNull
 	private int reservedSpace;
 
 	@ManyToOne
@@ -22,6 +23,11 @@ public class Reservation {
 
 	@ManyToOne
 	private Port portReservation;
+
+	@NotNull
+	@FutureOrPresent
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate reservedDate;
 
 	public Reservation() {
 	}
@@ -52,5 +58,13 @@ public class Reservation {
 
 	public void setPortReservation(Port portReservation) {
 		this.portReservation = portReservation;
+	}
+
+	public LocalDate getReservedDate() {
+		return reservedDate;
+	}
+
+	public void setReservedDate(LocalDate reservedDate) {
+		this.reservedDate = reservedDate;
 	}
 }
