@@ -10,24 +10,34 @@
 <button onclick="goBack()">Go Back</button>
 <table width="550x">
 
-<form:form method="post" modelAttribute="port">
-    <form:select path="lake" items="${filterByLakes}"/>
-    <input type="submit" value="Filter"/>
-</form:form>
+        <form:form method="post" modelAttribute="port" action="/PortBooking_war_exploded/reservation/showFilterPorts/${userId}">
+            <form:select path="lake" items="${filterByLakes}"/>
+            <input type="submit" value="Filter"/>
+        </form:form>
     <tr>
         <th>Port Name</th>
         <th>Lake</th>
         <th>Description</th>
+        <th>Booking Price for one space</th>
         <th>Port Owner</th>
+        <th>Pick a Date</th>
         <th>Action</th>
     </tr>
-    <c:forEach items="${findAllPorts}" var="temp">
+    <c:forEach items="${findAllPorts}" var="port">
         <tr>
-            <td>${temp.portName}</td>
-            <td>${temp.lake}</td>
-            <td>${temp.description}</td>
-            <td>${temp.portOwner.fullName}</td>
-            <td><a href="http://localhost:8080/PortBooking_war_exploded/reservation/makeReservation/${temp.id}/${user.id}">Make Reservation</a>
+            <td>${port.portName}</td>
+            <td>${port.lake}</td>
+            <td>${port.description}</td>
+            <td>${port.price}</td>
+            <td>${port.portOwner.fullName}</td>
+            <td>
+                <form:form method="post" modelAttribute="reservation" action="/PortBooking_war_exploded/reservation/showAllPorts/${userId}">
+                <form:errors path="reservedDate"/>
+                <form:input min="${date}" path="reservedDate" value="${date}" type="date"/></td>
+            <td>
+                <form:input path="portReservation" value="${port.id}" type="hidden"/>
+                <input type="submit" value="Make Reservation"/>
+                </form:form>
             </td>
         </tr>
     </c:forEach>

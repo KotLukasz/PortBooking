@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
@@ -24,10 +25,17 @@ public class Reservation {
 	@ManyToOne
 	private Port portReservation;
 
+	@Min(value = 1)
+	@Digits(integer=6, fraction=2)
 	@NotNull
+	private BigDecimal fullPrice;
+
+
 	@FutureOrPresent
+	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate reservedDate;
+
 
 	public Reservation() {
 	}
@@ -66,5 +74,13 @@ public class Reservation {
 
 	public void setReservedDate(LocalDate reservedDate) {
 		this.reservedDate = reservedDate;
+	}
+
+	public BigDecimal getFullPrice() {
+		return fullPrice;
+	}
+
+	public void setFullPrice(BigDecimal fullPrice) {
+		this.fullPrice = fullPrice;
 	}
 }

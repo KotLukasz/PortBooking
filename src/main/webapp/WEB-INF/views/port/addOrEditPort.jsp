@@ -16,6 +16,11 @@
     <form:errors path="lake" />
     Lake <form:input path="lake"/>
     <br/>
+    <br/>
+    <form:errors path="price" />
+    Booking price for one space
+    <form:input path="price"/>
+    <br/>
     <form:errors path="space" />
     Available space for booking
     <form:select path="space">

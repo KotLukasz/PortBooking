@@ -12,7 +12,7 @@
     <tr>
         <th>Port Name</th>
         <th>Lake</th>
-        <th>Space</th>
+        <th>Booking price for one space</th>
         <th>Description</th>
         <th>Port Owner</th>
         <th>Action</th>
@@ -21,7 +21,7 @@
         <tr>
             <td>${temp.portName}</td>
             <td>${temp.lake}</td>
-            <td>${temp.space}</td>
+            <td>${temp.price}</td>
             <td>${temp.description}</td>
             <td>${temp.portOwner.fullName}</td>
             <td><a href="http://localhost:8080/PortBooking_war_exploded/port/editPort/${temp.id}/${temp.portOwner.id}">Update</a>

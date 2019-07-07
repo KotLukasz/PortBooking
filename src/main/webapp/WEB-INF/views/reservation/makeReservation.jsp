@@ -11,29 +11,28 @@
 <table width="550x">
     <tr>
         <th>Port Name</th>
-        <th>Space Left</th>
+        <th>Booking price for one Space</th>
         <th>Choose Space to Reserve</th>
         <th>Date</th>
         <th>Action</th>
     </tr>
     <tr>
         <td>${port.portName}</td>
-        <td>
-            ${port.spaceLeftToReserve}
-        </td>
+        <td>${port.price}</td>
         <td>
             <form:form method="post" modelAttribute="reservation">
             <form:select path="reservedSpace">
                 <form:options items="${spaceLeft}"/>
             </form:select>
+
         </td>
         <td>
-        <form:errors path="reservedDate"/>
-         <form:input path="reservedDate" value = "${date}" readonly="true"/></td>
+         <input path="reservedDate" value = "${reservedDate}" readonly="true"/></td>
         <td>
             <input type="submit" value="Save"/>
+            </form:form>
         </td>
-        </form:form>
+
     </tr>
 
 

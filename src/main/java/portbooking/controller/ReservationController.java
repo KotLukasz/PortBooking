@@ -1,6 +1,7 @@
 package portbooking.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +16,11 @@ import portbooking.repository.UserRepository;
 import javax.validation.Valid;
 import javax.validation.Validator;
 import javax.validation.constraints.Pattern;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDate;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,36 +72,39 @@ public class ReservationController {
 	public String showAllPorts(Model model, @PathVariable Long userId) {
 		model.addAttribute("user", userRepository.findOne(userId));
 		model.addAttribute("port", new Port());
+		model.addAttribute("reservation", new Reservation());
 		return "reservation/showAllPorts";
 	}
 
-	@PostMapping("/showAllPorts/{userId}")
+	@PostMapping("/showFilterPorts/{userId}")
 	public String filterPorts(@ModelAttribute Port port, @PathVariable Long userId, Model model) {
 		model.addAttribute("filter", portRepository.findPortByLakeName(port.getLake()));
 		model.addAttribute("user", userRepository.findOne(userId));
 		model.addAttribute("port", new Port());
+		model.addAttribute("reservation", new Reservation());
 		return "reservation/showFilterPortsByLake";
 	}
 
-	@GetMapping("/makeReservation/{portId}/{userId}")
-	public String makeReservation(Model model, @PathVariable Long portId, @PathVariable Long userId) {
+
+	@PostMapping("/showAllPorts/{userId}")
+	public String showAllPorts(@ModelAttribute("reservation") Reservation reservation,@PathVariable Long userId) {
+			return "redirect:/reservation/makeReservation/" + reservation.getPortReservation().getId() + "/" + userId + "/" + reservation.getReservedDate();
+		}
+
+	@GetMapping("/makeReservation/{portId}/{userId}/{reservedDate}")
+	public String makeReservation(Model model, @PathVariable Long portId, @PathVariable Long userId, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate reservedDate) {
 		model.addAttribute("reservation", new Reservation());
 		model.addAttribute("port", portRepository.findOne(portId));
-		model.addAttribute("spaceLeft", spaceToChoose(portId));
+		model.addAttribute("spaceLeft", spaceToChoose(reservedDate, portId));
 		return "reservation/makeReservation";
 	}
 
-	@PostMapping("/makeReservation/{portId}/{userId}")
-	public String makeReservation(@ModelAttribute @Valid Reservation reservation, BindingResult result, @PathVariable Long portId, @PathVariable Long userId, Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("port", portRepository.findOne(portId));
-			model.addAttribute("spaceLeft", spaceToChoose(portId));
-			return "reservation/makeReservation";
-		}
+	@PostMapping("/makeReservation/{portId}/{userId}/{reservedDate}")
+	public String makeReservation(@ModelAttribute  Reservation reservation, @PathVariable Long portId, @PathVariable Long userId) {
 		reservation.setPortReservation(portRepository.findOne(portId));
 		reservation.setUserReservation(userRepository.findOne(userId));
+		reservation.setFullPrice(BigDecimal.valueOf(reservation.getReservedSpace()).multiply(reservation.getPortReservation().getPrice()));
 		reservationRepository.save(reservation);
-		portRepository.updatePortSetSpaceLeftToReserve(portId, (portRepository.findOne(portId).getSpaceLeftToReserve() - reservation.getReservedSpace()));
 		return "redirect:/user/accountUser/" + userId;
 	}
 
@@ -107,16 +114,15 @@ public class ReservationController {
 		return "reservation/showReservations";
 	}
 
-	@GetMapping("/deleteReservation/{reservationId}/{userId}/{portId}")
-	public String deleteReservation(@PathVariable Long reservationId, @PathVariable Long userId, @PathVariable Long portId) {
-		portRepository.updatePortSetSpaceLeftToReserve(portId, (portRepository.findOne(portId).getSpaceLeftToReserve() + reservationRepository.findOne(reservationId).getReservedSpace()));
+	@GetMapping("/deleteReservation/{reservationId}/{userId}")
+	public String deleteReservation(@PathVariable Long reservationId, @PathVariable Long userId) {
 		reservationRepository.delete(reservationId);
 		return "redirect:/user/accountUser/" + userId;
 	}
 
 
-	public int[] spaceToChoose(Long portId) {
-		int[] spaceArray = new int[portRepository.findOne(portId).getSpaceLeftToReserve()];
+	public int[] spaceToChoose(LocalDate localDate, Long portId) {
+		int[] spaceArray = new int[portRepository.findOne(portId).getSpace() - reservationRepository.sumReservedSpaceByReservedDate(localDate,portId)];
 		int j = 1;
 		for (int i = 0; i < spaceArray.length; i++) {
 			spaceArray[i] = j++;

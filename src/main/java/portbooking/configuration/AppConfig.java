@@ -20,9 +20,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import portbooking.converter.PortConverter;
 import portbooking.converter.PortOwnerConverter;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManagerFactory;
 import javax.validation.Validator;
 import java.util.Locale;
+import java.util.TimeZone;
 
 @Configuration
 @EnableWebMvc
@@ -37,7 +39,7 @@ public class AppConfig implements WebMvcConfigurer {
 				new InternalResourceViewResolver();
 		viewResolver.setPrefix("/WEB-INF/views/");
 		viewResolver.setSuffix(".jsp");
-		viewResolver.setContentType("text/html;charset=UTF-8");
+		viewResolver.setContentType("text/html; charset=UTF-8");
 		return viewResolver;
 	}
 
@@ -88,5 +90,9 @@ public class AppConfig implements WebMvcConfigurer {
 		return new PortConverter();
 	}
 
+	@PostConstruct
+	void started() {
+		TimeZone.setDefault(TimeZone.getTimeZone("TimeZone"));
+	}
 
 }

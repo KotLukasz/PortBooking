@@ -1,10 +1,11 @@
 package portbooking.entity;
 
 
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.math.BigDecimal;
+import java.text.Bidi;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,23 +18,26 @@ public class Port {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotEmpty
+	@NotNull
 	@Size(min = 2, max = 30)
 	private String portName;
 
-	@NotEmpty
+	@NotNull
 	@Size(min = 2, max = 30)
 	private String lake;
 
 	@NotNull
 	private int space;
 
-	@NotEmpty
+	@NotNull
 	private String description;
 
-	private int spaceLeftToReserve;
-
 	private LocalDateTime createdOn;
+
+	@Min(value = 1)
+	@Digits(integer=6, fraction=2)
+	@NotNull
+	private BigDecimal price;
 
 	@NotNull
 	@ManyToOne
@@ -90,14 +94,6 @@ public class Port {
 		return createdOn;
 	}
 
-	public int getSpaceLeftToReserve() {
-		return spaceLeftToReserve;
-	}
-
-	public void setSpaceLeftToReserve(int spaceLeftToReserve) {
-		this.spaceLeftToReserve = spaceLeftToReserve;
-	}
-
 	public PortOwner getPortOwner() {
 		return portOwner;
 	}
@@ -112,5 +108,14 @@ public class Port {
 
 	public void setReservation(List<Reservation> reservation) {
 		this.reservation = reservation;
+	}
+
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 }

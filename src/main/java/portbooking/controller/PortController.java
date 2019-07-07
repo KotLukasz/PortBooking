@@ -38,6 +38,7 @@ public class PortController {
 			model.addAttribute("owner", portOwnerRepository.findOne(id));
 			return "port/addOrEditPort";
 		}
+
 		portRepository.save(port);
 		return "redirect:/portOwner/accountPortOwner/" + port.getPortOwner().getId();
 	}
@@ -61,7 +62,7 @@ public class PortController {
 			model.addAttribute("owner", portOwnerRepository.findOne(portOwnerId));
 			return "port/addOrEditPort";
 		}
-		portRepository.updatePortSetFirstNameAndLastNameAndEmailAndPassword(id, port.getPortName(), port.getLake(), port.getSpace() ,port.getDescription());
+		portRepository.updatePortSetPortNameAndLakeAndSpaceAndDescription(id, port.getPortName(), port.getLake(), port.getSpace() ,port.getDescription());
 		return "redirect:/portOwner/accountPortOwner/" + portOwnerId;
 	}
 

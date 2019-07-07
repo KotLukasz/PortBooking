@@ -6,20 +6,23 @@
     <persistence-unit name="PortBooking">
         <properties>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://localhost:3306/PortBooking?serverTimezone=UTC" />
-            <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="coderslab" />
+                      value="jdbc:mysql://localhost:3306/PortBooking?serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="coderslab"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.schema-generation.database.action"
                       value="update"/>
+            <property name="spring.jpa.properties.hibernate.jdbc.time_zone" value="UTC"/>
             <property name="javax.persistence.validation.mode" value="none"/>
             <property name="hibernate.dialect"
-                      value="org.hibernate.dialect.MySQL57Dialect" />
-            <property name="hibernate.connection.characterEncoding" value="utf8" />
+                      value="org.hibernate.dialect.MySQL57Dialect"/>
+            <property name="hibernate.connection.characterEncoding" value="utf8"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
-        </properties></persistence-unit></persistence>
+        </properties>
+    </persistence-unit>
+</persistence>
 
-<!--<property name="javax.persistence.sql-load-script-source"-->
-<!--          value="META-INF/sql/data.sql" />-->
+        <!--<property name="javax.persistence.sql-load-script-source"-->
+        <!--          value="META-INF/sql/data.sql" />-->

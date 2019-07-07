@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import portbooking.entity.Reservation;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -14,5 +15,11 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
 	@Query("select r from Reservation r where r.userReservation.id = :id")
 	List<Reservation> findReservationByUserId(@Param("id") Long id);
+
+	@Query("select r from Reservation r where r.portReservation.portOwner.id = :id")
+	List<Reservation> findReservationByPortOwnerId(@Param("id") Long id);
+
+	@Query("select COALESCE (sum (r.reservedSpace), 0) from Reservation r where r.reservedDate = :reservedDate and r.portReservation.id = :portReservation")
+	int sumReservedSpaceByReservedDate(@Param("reservedDate") LocalDate reservedDate, @Param("portReservation") Long portReservation);
 
 }

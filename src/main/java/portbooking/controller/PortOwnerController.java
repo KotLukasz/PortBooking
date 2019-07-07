@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import portbooking.entity.PortOwner;
 import portbooking.repository.PortOwnerRepository;
+import portbooking.repository.ReservationRepository;
 
 import javax.validation.Valid;
 import javax.validation.Validator;
@@ -19,6 +20,9 @@ public class PortOwnerController {
 
 	@Autowired
 	private PortOwnerRepository portOwnerRepository;
+
+	@Autowired
+	private ReservationRepository reservationRepository;
 
 	@Autowired
 	Validator validator;
@@ -67,6 +71,18 @@ public class PortOwnerController {
 	public String editPortOwner(@PathVariable Long id) {
 		portOwnerRepository.delete(id);
 		return "index";
+	}
+
+	@GetMapping("/showReservations/{portOwnerID}")
+	public String showReservationsById(Model model, @PathVariable Long portOwnerID) {
+		model.addAttribute("reservation", reservationRepository.findReservationByPortOwnerId(portOwnerID));
+		return "portOwner/showReservedPorts";
+	}
+
+	@GetMapping("/deleteReservation/{reservationId}/{portOwnerId")
+	public String deleteReservation(@PathVariable Long reservationId, @PathVariable Long portOwnerId) {
+		reservationRepository.delete(reservationId);
+		return "redirect:/portOwner/accountPortOwner/" + portOwnerId;
 	}
 
 }
