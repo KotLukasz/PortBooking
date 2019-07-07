@@ -2,10 +2,27 @@
 <%@ taglib prefix="form"
            uri="http://www.springframework.org/tags/form" %>
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css">
 <img src="<c:url value="/resources/images/topMainImage.jpg"/> " alt="topMainImage" class="image">
-<br/>
+<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+<div id="map" class="map"></div>
+<script type="text/javascript">
+    var map = new ol.Map({
+        target: 'map',
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
+        ],
+        view: new ol.View({
+            center: ol.proj.fromLonLat([21.75, 53.90]),
+            zoom: 9
+        })
+    });
+</script>
 
+
+<br/>
 <p class="welcomeText">Welcome to the PortBooking application for Masurian Lake District</p>
 <br/>
 <div class="indexDiv">
@@ -36,3 +53,6 @@
         </button>
     </p>
 </div>
+
+
+

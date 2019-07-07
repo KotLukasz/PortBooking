@@ -1,5 +1,5 @@
 .image {
-    display: block;
+    display: inline-block;
     width: 690px;
 }
 
@@ -43,3 +43,10 @@
     color: black;
 }
 
+ .map {
+     display: inline-block;
+     height: 450px;
+     width: 500px;
+     margin-left: 20px;
+     border: solid 2px;
+ }
