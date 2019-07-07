@@ -1,0 +1,45 @@
+.image {
+    display: block;
+    width: 690px;
+}
+
+.indexP {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    color: red;
+}
+
+.indexDiv {
+    margin: auto;
+    display: inline-block;
+    background: #FFFFFF;
+    width: 250px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+
+.link {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: #4CAF50;
+    width: 100%;
+    padding: 15px;
+    color: white;
+    font-size: 14px;
+}
+
+.welcomeText {
+    background: #FFFFFF;
+    width: 500px;
+    margin-left: 80px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    display: block;
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    color: black;
+}
+

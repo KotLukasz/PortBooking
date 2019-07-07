@@ -6,12 +6,12 @@
     <persistence-unit name="PortBooking">
         <properties>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://localhost:3306/PortBooking?serverTimezone=UTC"/>
+                      value="jdbc:mysql://localhost:3306/PortBooking?createDatabaseIfNotExist=true&amp;serverTimezone=UTC"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="coderslab"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.schema-generation.database.action"
-                      value="update"/>
+                      value="drop-and-create"/>
             <property name="spring.jpa.properties.hibernate.jdbc.time_zone" value="UTC"/>
             <property name="javax.persistence.validation.mode" value="none"/>
             <property name="hibernate.dialect"
@@ -20,9 +20,9 @@
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
+            <property name="javax.persistence.sql-load-script-source"
+                      value="META-INF/sql/data.sql" />
         </properties>
     </persistence-unit>
 </persistence>
 
-        <!--<property name="javax.persistence.sql-load-script-source"-->
-        <!--          value="META-INF/sql/data.sql" />-->
