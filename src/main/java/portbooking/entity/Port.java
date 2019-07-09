@@ -5,7 +5,6 @@ package portbooking.entity;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
-import java.text.Bidi;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

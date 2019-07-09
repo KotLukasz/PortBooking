@@ -1,6 +1,6 @@
 package portbooking.entity;
 
-import org.hibernate.validator.constraints.NotEmpty;
+
 import portbooking.authentication.UniqueEmailUser;
 
 import javax.persistence.*;

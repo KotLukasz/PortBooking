@@ -1,11 +1,11 @@
 package portbooking.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.*;
 import portbooking.entity.Port;
 import portbooking.entity.Reservation;
@@ -13,22 +13,19 @@ import portbooking.repository.PortRepository;
 import portbooking.repository.ReservationRepository;
 import portbooking.repository.UserRepository;
 
-import javax.validation.Valid;
+
 import javax.validation.Validator;
-import javax.validation.constraints.Pattern;
+
 import java.math.BigDecimal;
-import java.math.BigInteger;
+
 import java.time.LocalDate;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/reservation")
 public class ReservationController {
-
-
 
 
 	@Autowired
@@ -64,7 +61,7 @@ public class ReservationController {
 	}
 
 	@ModelAttribute("findAllPorts")
-	public List<Port>  findAllPorts () {
+	public List<Port> findAllPorts() {
 		return portRepository.findAll();
 	}
 
@@ -87,12 +84,12 @@ public class ReservationController {
 
 
 	@PostMapping("/showAllPorts/{userId}")
-	public String showAllPorts(@ModelAttribute("reservation") Reservation reservation,@PathVariable Long userId) {
-			return "redirect:/reservation/makeReservation/" + reservation.getPortReservation().getId() + "/" + userId + "/" + reservation.getReservedDate();
-		}
+	public String showAllPorts(@ModelAttribute("reservation") Reservation reservation, @PathVariable Long userId) {
+		return "redirect:/reservation/makeReservation/" + reservation.getPortReservation().getId() + "/" + userId + "/" + reservation.getReservedDate();
+	}
 
 	@GetMapping("/makeReservation/{portId}/{userId}/{reservedDate}")
-	public String makeReservation(Model model, @PathVariable Long portId, @PathVariable Long userId, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate reservedDate) {
+	public String makeReservation(Model model, @PathVariable Long portId, @PathVariable Long userId, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate reservedDate) {
 		model.addAttribute("reservation", new Reservation());
 		model.addAttribute("port", portRepository.findOne(portId));
 		model.addAttribute("spaceLeft", spaceToChoose(reservedDate, portId));
@@ -100,7 +97,7 @@ public class ReservationController {
 	}
 
 	@PostMapping("/makeReservation/{portId}/{userId}/{reservedDate}")
-	public String makeReservation(@ModelAttribute  Reservation reservation, @PathVariable Long portId, @PathVariable Long userId) {
+	public String makeReservation(@ModelAttribute Reservation reservation, @PathVariable Long portId, @PathVariable Long userId) {
 		reservation.setPortReservation(portRepository.findOne(portId));
 		reservation.setUserReservation(userRepository.findOne(userId));
 		reservation.setFullPrice(BigDecimal.valueOf(reservation.getReservedSpace()).multiply(reservation.getPortReservation().getPrice()));
@@ -123,7 +120,7 @@ public class ReservationController {
 	}
 
 	@PostMapping("/editReservation/{reservationId}/{userId}")
-	public String editReservation(@ModelAttribute  Reservation reservation, @PathVariable Long userId, @PathVariable Long reservationId) {
+	public String editReservation(@ModelAttribute Reservation reservation, @PathVariable Long userId, @PathVariable Long reservationId) {
 		reservation.setFullPrice(BigDecimal.valueOf(reservation.getReservedSpace()).multiply(reservationRepository.findOne(reservationId).getPortReservation().getPrice()));
 		reservationRepository.updateSetReservedSpaceAndFullPrice(reservationId, reservation.getReservedSpace(), reservation.getFullPrice());
 		return "redirect:/user/accountUser/" + userId;
@@ -135,8 +132,8 @@ public class ReservationController {
 		return "redirect:/user/accountUser/" + userId;
 	}
 
-	public int[] spaceToChooseEdit (LocalDate localDate, Long reservationId, Long portId) {
-		int[] spaceArray = new int[portRepository.findOne(portId).getSpace() - reservationRepository.sumReservedSpaceByReservedDate(localDate,portId) + reservationRepository.findOne(reservationId).getReservedSpace()];
+	public int[] spaceToChooseEdit(LocalDate localDate, Long reservationId, Long portId) {
+		int[] spaceArray = new int[portRepository.findOne(portId).getSpace() - reservationRepository.sumReservedSpaceByReservedDate(localDate, portId) + reservationRepository.findOne(reservationId).getReservedSpace()];
 		int j = 1;
 		for (int i = 0; i < spaceArray.length; i++) {
 			spaceArray[i] = j++;
@@ -144,9 +141,12 @@ public class ReservationController {
 		return spaceArray;
 	}
 
-	public int[] spaceToChoose (LocalDate localDate, Long portId) {
-		int[] spaceArray = new int[portRepository.findOne(portId).getSpace() - reservationRepository.sumReservedSpaceByReservedDate(localDate,portId)];
+	public int[] spaceToChoose(LocalDate localDate, Long portId) {
+		int[] spaceArray = new int[portRepository.findOne(portId).getSpace() - reservationRepository.sumReservedSpaceByReservedDate(localDate, portId)];
 		int j = 1;
+		if (spaceArray.length <= 0) {
+			return new int[0];
+		}
 		for (int i = 0; i < spaceArray.length; i++) {
 			spaceArray[i] = j++;
 		}
