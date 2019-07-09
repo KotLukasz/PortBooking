@@ -20,8 +20,12 @@
         <th>Description</th>
         <th>Booking Price for one space</th>
         <th>Port Owner</th>
-        <th>Pick a Date</th>
+
         <th>Action</th>
+            Pick a date:
+            <form:form method="post" modelAttribute="reservation" action="/PortBooking_war_exploded/reservation/showAllPorts/${userId}">
+            <form:errors path="reservedDate"/>
+            <form:input min="${date}" path="reservedDate" value="${date}" type="date"/>
     </tr>
     <c:forEach items="${findAllPorts}" var="port">
         <tr>
@@ -30,15 +34,14 @@
             <td>${port.description}</td>
             <td>${port.price}</td>
             <td>${port.portOwner.fullName}</td>
-            <td>
-                <form:form method="post" modelAttribute="reservation" action="/PortBooking_war_exploded/reservation/showAllPorts/${userId}">
-                <form:errors path="reservedDate"/>
-                <form:input min="${date}" path="reservedDate" value="${date}" type="date"/></td>
+
             <td>
                 <form:input path="portReservation" value="${port.id}" type="hidden"/>
                 <input type="submit" value="Make Reservation"/>
-                </form:form>
+
             </td>
         </tr>
     </c:forEach>
+
+    </form:form>
 </table>
