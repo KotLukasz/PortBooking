@@ -14,3 +14,5 @@ Spring MVC <br/>
 Spring Data <br/>
 Hibernate <br/>
 MySQL <br/>
+JavaScript <br/>
+jQuery <br/>

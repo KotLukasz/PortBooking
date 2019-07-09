@@ -11,8 +11,11 @@
 <table width="550x">
 
         <form:form method="post" modelAttribute="port" action="/PortBooking_war_exploded/reservation/showFilterPorts/${userId}">
-            <form:select path="lake" items="${filterByLakes}"/>
+        <form:select path="lake">
+            <form:option value="-" label="--Filter By--"/>
+            <form:options items="${filterByLakes}" />
             <input type="submit" value="Filter"/>
+        </form:select>
         </form:form>
     <tr>
         <th>Port Name</th>
