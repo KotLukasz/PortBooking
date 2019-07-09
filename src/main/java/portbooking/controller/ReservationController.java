@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import portbooking.entity.Port;
 import portbooking.entity.Reservation;
@@ -14,6 +15,7 @@ import portbooking.repository.ReservationRepository;
 import portbooking.repository.UserRepository;
 
 
+import javax.validation.Valid;
 import javax.validation.Validator;
 
 import java.math.BigDecimal;
@@ -82,7 +84,6 @@ public class ReservationController {
 		return "reservation/showFilterPortsByLake";
 	}
 
-
 	@PostMapping("/showAllPorts/{userId}")
 	public String showAllPorts(@ModelAttribute("reservation") Reservation reservation, @PathVariable Long userId) {
 		return "redirect:/reservation/makeReservation/" + reservation.getPortReservation().getId() + "/" + userId + "/" + reservation.getReservedDate();
@@ -92,7 +93,12 @@ public class ReservationController {
 	public String makeReservation(Model model, @PathVariable Long portId, @PathVariable Long userId, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate reservedDate) {
 		model.addAttribute("reservation", new Reservation());
 		model.addAttribute("port", portRepository.findOne(portId));
-		model.addAttribute("spaceLeft", spaceToChoose(reservedDate, portId));
+		model.addAttribute("availableSpace", "Available Space");
+		if (spaceToChoose(reservedDate, portId).length <= 0) {
+			return "reservation/noAvailableSpace";
+		} else {
+			model.addAttribute("spaceLeft", spaceToChoose(reservedDate, portId));
+		}
 		return "reservation/makeReservation";
 	}
 
@@ -144,9 +150,6 @@ public class ReservationController {
 	public int[] spaceToChoose(LocalDate localDate, Long portId) {
 		int[] spaceArray = new int[portRepository.findOne(portId).getSpace() - reservationRepository.sumReservedSpaceByReservedDate(localDate, portId)];
 		int j = 1;
-		if (spaceArray.length <= 0) {
-			return new int[0];
-		}
 		for (int i = 0; i < spaceArray.length; i++) {
 			spaceArray[i] = j++;
 		}

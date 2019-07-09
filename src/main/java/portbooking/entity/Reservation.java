@@ -16,7 +16,7 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Min(value = 1)
+    @Min(value = 1)
 	private int reservedSpace;
 
 	@ManyToOne

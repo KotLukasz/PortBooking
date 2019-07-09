@@ -22,12 +22,11 @@
         <td>
             <form:form method="post" modelAttribute="reservation">
             <form:select path="reservedSpace">
-                <form:options items="${spaceLeft}"/>
+                <form:options items="${spaceLeft}" />
             </form:select>
-
         </td>
         <td>
-         <input path="reservedDate" value = "${reservedDate}" readonly="true"/></td>
+            <input path="reservedDate" value = "${reservedDate}" readonly="true"/></td>
         <td>
             <input type="submit" value="Save"/>
             </form:form>
