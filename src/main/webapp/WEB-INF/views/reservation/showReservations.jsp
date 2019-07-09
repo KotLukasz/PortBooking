@@ -29,6 +29,7 @@
             <td>${temp.userReservation.fullName}</td>
             <td>${temp.reservedDate}</td>
             <td><a href="http://localhost:8080/PortBooking_war_exploded/reservation/deleteReservation/${temp.id}/${temp.userReservation.id}">Delete Reservation</a>
+            <td><a href="http://localhost:8080/PortBooking_war_exploded/reservation/editReservation/${temp.id}/${temp.userReservation.id}">Edit Reservation</a>
         </tr>
     </c:forEach>
 </table>

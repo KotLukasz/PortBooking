@@ -114,14 +114,37 @@ public class ReservationController {
 		return "reservation/showReservations";
 	}
 
+
+	@GetMapping("/editReservation/{reservationId}/{userId}")
+	public String editReservation(Model model, @PathVariable Long reservationId, @PathVariable Long userId) {
+		model.addAttribute("reservation", reservationRepository.findOne(reservationId));
+		model.addAttribute("spaceLeft", spaceToChooseEdit(reservationRepository.findOne(reservationId).getReservedDate(), reservationId, reservationRepository.findOne(reservationId).getPortReservation().getId()));
+		return "reservation/editReservation";
+	}
+
+	@PostMapping("/editReservation/{reservationId}/{userId}")
+	public String editReservation(@ModelAttribute  Reservation reservation, @PathVariable Long userId, @PathVariable Long reservationId) {
+		reservation.setFullPrice(BigDecimal.valueOf(reservation.getReservedSpace()).multiply(reservationRepository.findOne(reservationId).getPortReservation().getPrice()));
+		reservationRepository.updateSetReservedSpaceAndFullPrice(reservationId, reservation.getReservedSpace(), reservation.getFullPrice());
+		return "redirect:/user/accountUser/" + userId;
+	}
+
 	@GetMapping("/deleteReservation/{reservationId}/{userId}")
 	public String deleteReservation(@PathVariable Long reservationId, @PathVariable Long userId) {
 		reservationRepository.delete(reservationId);
 		return "redirect:/user/accountUser/" + userId;
 	}
 
+	public int[] spaceToChooseEdit (LocalDate localDate, Long reservationId, Long portId) {
+		int[] spaceArray = new int[portRepository.findOne(portId).getSpace() - reservationRepository.sumReservedSpaceByReservedDate(localDate,portId) + reservationRepository.findOne(reservationId).getReservedSpace()];
+		int j = 1;
+		for (int i = 0; i < spaceArray.length; i++) {
+			spaceArray[i] = j++;
+		}
+		return spaceArray;
+	}
 
-	public int[] spaceToChoose(LocalDate localDate, Long portId) {
+	public int[] spaceToChoose (LocalDate localDate, Long portId) {
 		int[] spaceArray = new int[portRepository.findOne(portId).getSpace() - reservationRepository.sumReservedSpaceByReservedDate(localDate,portId)];
 		int j = 1;
 		for (int i = 0; i < spaceArray.length; i++) {

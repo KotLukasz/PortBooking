@@ -30,7 +30,6 @@ public class Reservation {
 	@NotNull
 	private BigDecimal fullPrice;
 
-
 	@FutureOrPresent
 	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
