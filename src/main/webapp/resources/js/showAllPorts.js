@@ -23,7 +23,6 @@ $(document).ready(function () {
 
     });
 
-
     function customClearLayers() {
         mymap.eachLayer(function (marker) {
             if (marker instanceof L.Marker || marker instanceof L.CircleMarker) {
@@ -41,7 +40,6 @@ $(document).ready(function () {
     $("#submitFilter").on('click', function () {
         customClearLayers();
 
-
         $("tr.map").each(function () {
             if ($('#selectLake option:selected').html() === "Show All") {
                 $(this).find("#lakeName").parent().show()
@@ -57,10 +55,8 @@ $(document).ready(function () {
                 var marker = L.marker([$(this).find("#markerPositionLat").html(), $(this).find("#markerPositionLng").html()], {icon: myIcon})
                     .addTo(mymap)
                     .bindPopup($(this).find("#portName").html());
-
             }
         });
     });
-
 
 });
