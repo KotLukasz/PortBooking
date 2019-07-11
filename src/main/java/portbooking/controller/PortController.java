@@ -62,7 +62,7 @@ public class PortController {
 			model.addAttribute("owner", portOwnerRepository.findOne(portOwnerId));
 			return "port/addOrEditPort";
 		}
-		portRepository.updatePortSetPortNameAndLakeAndSpaceAndDescription(id, port.getPortName(), port.getLake(), port.getSpace() ,port.getDescription());
+		portRepository.updatePortSetPortNameAndLakeAndSpaceAndDescription(id, port.getPortName(), port.getLake(), port.getSpace() ,port.getDescription(), port.getMarkerPositionLat(), port.getMarkerPositionLng());
 		return "redirect:/portOwner/accountPortOwner/" + portOwnerId;
 	}
 

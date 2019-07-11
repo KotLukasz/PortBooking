@@ -21,10 +21,8 @@ public interface PortRepository extends JpaRepository<Port, Long> {
 
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("Update Port p set p.portName = :portName, p.lake =:lake, p.space = :space,p.description =:description where p.id = :id")
-	void updatePortSetPortNameAndLakeAndSpaceAndDescription (@Param("id") Long id, @Param("portName") String portName, @Param("lake") String lake, @Param("space") int space, @Param("description") String description);
-
-
+	@Query("Update Port p set p.portName = :portName, p.lake =:lake, p.space = :space,p.description =:description, p.markerPositionLat =:markerPositionLat, p.markerPositionLng =:markerPositionLng where p.id = :id")
+	void updatePortSetPortNameAndLakeAndSpaceAndDescription (@Param("id") Long id, @Param("portName") String portName, @Param("lake") String lake, @Param("space") int space, @Param("description") String description, @Param("markerPositionLat") String markerPositionLat, @Param("markerPositionLng") String markerPositionLng);
 
 }
 
