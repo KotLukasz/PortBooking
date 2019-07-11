@@ -31,7 +31,7 @@ public class Port {
 	@Size(min = 2, max = 30)
 	private String lake;
 
-	@NotNull
+	@Min(value = 1)
 	private int space;
 
 	@NotNull

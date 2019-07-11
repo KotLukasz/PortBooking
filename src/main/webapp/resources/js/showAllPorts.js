@@ -23,6 +23,12 @@ $(document).ready(function () {
 
     });
 
+    $(".reservationHref").on('click', function () {
+        var newUrl =  $(this).attr("href") +  $("#reservedDate").val();
+        $(this).attr("href", newUrl)
+    });
+
+
     function customClearLayers() {
         mymap.eachLayer(function (marker) {
             if (marker instanceof L.Marker || marker instanceof L.CircleMarker) {
@@ -39,7 +45,6 @@ $(document).ready(function () {
 
     $("#submitFilter").on('click', function () {
         customClearLayers();
-
         $("tr.map").each(function () {
             if ($('#selectLake option:selected').html() === "Show All") {
                 $(this).find("#lakeName").parent().show()
