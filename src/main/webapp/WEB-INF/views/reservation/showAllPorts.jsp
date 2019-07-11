@@ -23,6 +23,7 @@
                 </c:forEach>
             </select>
             <button id="submitFilter" value="${temp}">Filter by Lake</button>
+
     <tr>
         <th>Port Name</th>
         <th>Lake</th>
