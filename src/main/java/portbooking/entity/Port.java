@@ -21,6 +21,12 @@ public class Port {
 	@Size(min = 2, max = 30)
 	private String portName;
 
+	@NotEmpty(message = "Please add Port marker on the map")
+	private String markerPositionLat;
+
+	@NotEmpty(message = "Please add Port marker on the map")
+	private String  markerPositionLng;
+
 	@NotNull
 	@Size(min = 2, max = 30)
 	private String lake;
@@ -117,4 +123,23 @@ public class Port {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+
+	public String getMarkerPositionLat() {
+		return markerPositionLat;
+	}
+
+	public void setMarkerPositionLat(String markerPositionLat) {
+		this.markerPositionLat = markerPositionLat;
+	}
+
+	public String getMarkerPositionLng() {
+		return markerPositionLng;
+	}
+
+	public void setMarkerPositionLng(String markerPositionLng) {
+		this.markerPositionLng = markerPositionLng;
+	}
+
+
+
 }

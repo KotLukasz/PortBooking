@@ -14,15 +14,19 @@ $(document).ready(function () {
         id: 'mapbox.streets'
     }).addTo(mymap);
 
-    var popup = L.popup();
 
+    var popup = L.popup();
     function onMapClick(e) {
         popup
             .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString())
+            .setContent("Are you sure this is correct locations?")
             .openOn(mymap);
-    }
 
+        var markerPositionLat = $("#markerPositionLat");
+        markerPositionLat.attr("value",e.latlng.lat);
+        var markerPositionLng = $("#markerPositionLng");
+        markerPositionLng.attr("value", e.latlng.lng);
+    }
     mymap.on('click', onMapClick);
 
 });

@@ -75,15 +75,6 @@ public class ReservationController {
 		return "reservation/showAllPorts";
 	}
 
-	@PostMapping("/showFilterPorts/{userId}")
-	public String filterPorts(@ModelAttribute Port port, @PathVariable Long userId, Model model) {
-		model.addAttribute("filter", portRepository.findPortByLakeName(port.getLake()));
-		model.addAttribute("user", userRepository.findOne(userId));
-		model.addAttribute("port", new Port());
-		model.addAttribute("reservation", new Reservation());
-		return "reservation/showFilterPortsByLake";
-	}
-
 	@PostMapping("/showAllPorts/{userId}")
 	public String showAllPorts(@ModelAttribute("reservation") Reservation reservation, @PathVariable Long userId) {
 		return "redirect:/reservation/makeReservation/" + reservation.getPortReservation().getId() + "/" + userId + "/" + reservation.getReservedDate();
