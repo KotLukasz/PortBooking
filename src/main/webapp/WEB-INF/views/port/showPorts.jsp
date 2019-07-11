@@ -10,12 +10,12 @@
             integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
             crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="<c:url value="/resources/js/showMyPorts.js"/>"></script>
+    <script src="<c:url value="/resources/js/showPorts.js"/>"></script>
 </head>
 <div id="mapid"></div>
 <br/>
 <button id="buttonGoBack">Go Back</button>
-<table width="550x" >
+<table class="tableClass" >
     <tr>
         <th>Port Name</th>
         <th>Lake</th>
@@ -40,3 +40,37 @@
     </c:forEach>
 </table>
 
+<style>
+    .tableClass {
+        border: solid 1px #DDEEEE;
+        border-collapse: collapse;
+        border-spacing: 0;
+        font: normal 13px Arial, sans-serif;
+        width: 700px;
+    }
+
+    .tableClass tr th {
+        background-color: #DDEFEF;
+        border: solid 1px #DDEEEE;
+        color: #336B6B;
+        padding: 10px;
+        text-align: center;
+        text-shadow: 1px 1px 1px #fff;
+    }
+
+    .tableClass tr td {
+        border: solid 1px #DDEEEE;
+        color: #333;
+        padding: 10px;
+        text-shadow: 1px 1px 1px #fff;
+        text-align: center;
+    }
+
+    #mapid {
+        display: inline-block;
+        width: 600px;
+        height: 450px;
+        position: relative;
+        outline: none;
+    }
+</style>

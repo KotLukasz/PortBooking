@@ -6,7 +6,7 @@
 .indexP {
     font-family: "Roboto", sans-serif;
     font-size: 20px;
-    color: red;
+    color: black;
 }
 
 .indexDiv {
@@ -18,7 +18,6 @@
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-
 
 .link {
     font-family: "Roboto", sans-serif;
@@ -43,10 +42,3 @@
     color: black;
 }
 
-#mapid {
-    display: inline-block;
-    width: 600px;
-    height: 400px;
-    position: relative;
-    outline: none;
-    }

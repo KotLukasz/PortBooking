@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="<c:url value="/resources/js/addOrEditPort.js"/>"></script>
 </head>
-
+<body>
 <div id="mapid"></div>
 <br/>
 <button id="buttonGoBack">Go Back</button>
@@ -58,3 +58,14 @@
     <form:input id="markerPositionLat" path="markerPositionLat" value="" readonly="true" type="hidden"/>
     <form:input id="markerPositionLng" path="markerPositionLng" value="" readonly="true" type="hidden"/>
 </form:form>
+</body>
+
+<style>
+    #mapid {
+        display: inline-block;
+        width: 600px;
+        height: 450px;
+        position: relative;
+        outline: none;
+    }
+</style>

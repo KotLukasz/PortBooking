@@ -9,15 +9,4 @@ $(document).ready(function () {
         id: 'mapbox.streets'
     }).addTo(mymap);
 
-    // var popup = L.popup();
-    //
-    // function onMapClick(e) {
-    //     popup
-    //         .setLatLng(e.latlng)
-    //         .setContent("Hello")
-    //         .openOn(mymap);
-    // }
-    //
-    // mymap.on('click', onMapClick);
-
 });

@@ -10,12 +10,13 @@
             integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
             crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="<c:url value="/resources/js/showReservations.js"/>"></script>
+    <script src="<c:url value="/resources/js/showPorts.js"/>"></script>
 </head>
+<body>
 <div id="mapid"></div>
 <br/>
 <button id="buttonGoBack">Go Back</button>
-<table width="550x">
+<table class="tableClass">
     <tr>
         <th>Port Name</th>
         <th>Lake</th>
@@ -24,21 +25,58 @@
         <th>Description</th>
         <th>Reserved by</th>
         <th>Date of Reservation</th>
-        <th>Action</th>
+        <th>Delete</th>
+        <th>Edit</th>
     </tr>
     <c:forEach items="${reservation}" var="temp" >
         <tr class="map">
-            <td>${temp.portReservation.portName}</td>
-            <td id="portName">${temp.portReservation.lake}</td>
+            <td id="portName">${temp.portReservation.portName}</td>
+            <td>${temp.portReservation.lake}</td>
             <td>${temp.reservedSpace}</td>
-            <td>${temp.fullPrice}</td>
+            <td>${temp.fullPrice} PLN</td>
             <td>${temp.portReservation.description}</td>
             <td>${temp.userReservation.fullName}</td>
             <td>${temp.reservedDate}</td>
             <td id="markerPositionLat" hidden>${temp.portReservation.markerPositionLat}</td>
             <td id="markerPositionLng" hidden>${temp.portReservation.markerPositionLng}</td>
-            <td><a href="http://localhost:8080/PortBooking_war_exploded/reservation/deleteReservation/${temp.id}/${temp.userReservation.id}">Delete Reservation</a>
-            <td><a href="http://localhost:8080/PortBooking_war_exploded/reservation/editReservation/${temp.id}/${temp.userReservation.id}">Edit Reservation</a>
+            <td><a href="http://localhost:8080/PortBooking_war_exploded/reservation/deleteReservationUser/${temp.id}/${temp.userReservation.id}">Delete Reservation</a>
+            <td><a href="http://localhost:8080/PortBooking_war_exploded/reservation/editReservationUser/${temp.id}/${temp.userReservation.id}">Edit Reservation</a>
         </tr>
     </c:forEach>
 </table>
+</body>
+
+<style>
+    .tableClass {
+        border: solid 1px #DDEEEE;
+        border-collapse: collapse;
+        border-spacing: 0;
+        font: normal 13px Arial, sans-serif;
+        width: 700px;
+    }
+
+    .tableClass tr th {
+        background-color: #DDEFEF;
+        border: solid 1px #DDEEEE;
+        color: #336B6B;
+        padding: 10px;
+        text-align: center;
+        text-shadow: 1px 1px 1px #fff;
+    }
+
+    .tableClass tr td {
+        border: solid 1px #DDEEEE;
+        color: #333;
+        padding: 10px;
+        text-shadow: 1px 1px 1px #fff;
+        text-align: center;
+    }
+
+    #mapid {
+        display: inline-block;
+        width: 600px;
+        height: 450px;
+        position: relative;
+        outline: none;
+    }
+</style>
