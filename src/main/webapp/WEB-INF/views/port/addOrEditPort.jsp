@@ -16,28 +16,21 @@
 <div id="mapid"></div>
 <br/>
 <button id="buttonGoBack">Go Back</button>
-<form:form method="post" modelAttribute="port">
-    <br/>
-    <input type="submit" value="Save"/>
-    <br/>
-    <br/>
+<br/>
+<form:form method="post" modelAttribute="port" class="login">
     Please choose position of your port on the map
     <br/>
     <form:errors path="markerPositionLat"/>
     <br/>
-    <br/>
     <form:errors path="portName" />
     Port Name <form:input path="portName"/>
-    <br/>
     <br/>
     <form:errors path="lake" />
     Lake <form:input path="lake"/>
     <br/>
-    <br/>
     <form:errors path="price" />
     Booking price for one space
     <form:input path="price"/>
-    <br/>
     <br/>
     <form:errors path="space" />
     Available space for booking
@@ -45,18 +38,18 @@
     <form:options items="${spaceToChoose}"/>
     </form:select>
     <br/>
-    <br/>
     <form:errors path="description" />
     Port Description
     <br/>
      <form:textarea rows="4" cols="15" path="description"/>
     <br/>
-    <br/>
     Port Owner
     <input value="${owner.fullName}" readonly/>
+    <br/>
     <form:input path="portOwner" value="${owner.id}" type="hidden"/>
     <form:input id="markerPositionLat" path="markerPositionLat" value="" readonly="true" type="hidden"/>
     <form:input id="markerPositionLng" path="markerPositionLng" value="" readonly="true" type="hidden"/>
+    <input type="submit" value="Save"/>
 </form:form>
 </body>
 

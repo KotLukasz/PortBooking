@@ -42,3 +42,11 @@
     color: black;
 }
 
+.login {
+    width: 250px;
+    padding: 12px 20px;
+    margin: 8px;
+    display: inline-block;
+    border: 1px solid;
+    box-sizing: border-box;
+}

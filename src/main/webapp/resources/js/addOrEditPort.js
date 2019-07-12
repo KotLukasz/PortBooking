@@ -19,7 +19,7 @@ $(document).ready(function () {
     function onMapClick(e) {
         popup
             .setLatLng(e.latlng)
-            .setContent("Are you sure this is correct locations?")
+            .setContent("This will be your Port localisation")
             .openOn(mymap);
 
         var markerPositionLat = $("#markerPositionLat");

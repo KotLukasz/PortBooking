@@ -16,7 +16,7 @@
 <div id="mapid"></div>
 <br/>
 <button id="buttonGoBack">Go Back</button>
-<select id="selectLake" name="selectLake">
+<select id="selectLake">
     <option>Show All</option>
     <c:forEach items="${filterByLakes}" var="temp">
         <option>${temp}</option>
