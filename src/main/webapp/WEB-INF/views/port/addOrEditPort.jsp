@@ -52,13 +52,3 @@
     <input type="submit" value="Save"/>
 </form:form>
 </body>
-
-<style>
-    #mapid {
-        display: inline-block;
-        width: 600px;
-        height: 450px;
-        position: relative;
-        outline: none;
-    }
-</style>

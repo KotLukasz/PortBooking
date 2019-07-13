@@ -43,7 +43,7 @@ $(document).ready(function () {
             .bindPopup($(this).find("#portName").html());
     });
 
-    $("#submitFilter").on('click', function () {
+    function filter() {
         customClearLayers();
         $("tr.map").each(function () {
             if ($('#selectLake option:selected').html() === "Show All") {
@@ -62,6 +62,10 @@ $(document).ready(function () {
                     .bindPopup($(this).find("#portName").html());
             }
         });
+    }
+
+    $('#selectLake').on('change', function () {
+        filter();
     });
 
 });

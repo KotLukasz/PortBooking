@@ -45,38 +45,3 @@
     </c:forEach>
 </table>
 </body>
-
-<style>
-    .tableClass {
-        border: solid 1px #DDEEEE;
-        border-collapse: collapse;
-        border-spacing: 0;
-        font: normal 13px Arial, sans-serif;
-        width: 700px;
-    }
-
-    .tableClass tr th {
-        background-color: #DDEFEF;
-        border: solid 1px #DDEEEE;
-        color: #336B6B;
-        padding: 10px;
-        text-align: center;
-        text-shadow: 1px 1px 1px #fff;
-    }
-
-    .tableClass tr td {
-        border: solid 1px #DDEEEE;
-        color: #333;
-        padding: 10px;
-        text-shadow: 1px 1px 1px #fff;
-        text-align: center;
-    }
-
-    #mapid {
-        display: inline-block;
-        width: 600px;
-        height: 450px;
-        position: relative;
-        outline: none;
-    }
-</style>
