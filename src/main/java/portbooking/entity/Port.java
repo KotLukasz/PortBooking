@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "ports")
@@ -17,7 +18,6 @@ public class Port {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
 	@Size(min = 2, max = 30)
 	private String portName;
 
@@ -27,14 +27,13 @@ public class Port {
 	@NotEmpty(message = "Please add Port marker on the map")
 	private String  markerPositionLng;
 
-	@NotNull
 	@Size(min = 2, max = 30)
 	private String lake;
 
 	@Min(value = 1)
 	private int space;
 
-	@NotNull
+	@NotBlank
 	private String description;
 
 	private LocalDateTime createdOn;

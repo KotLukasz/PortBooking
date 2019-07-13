@@ -20,25 +20,36 @@
 <form:form method="post" modelAttribute="port" class="login">
     Please choose position of your port on the map
     <br/>
-    <form:errors path="markerPositionLat"/>
+    <form:errors path="markerPositionLat" class="error"/>
     <br/>
-    <form:errors path="portName" />
-    Port Name <form:input path="portName"/>
+    <form:errors path="portName" class="error"/>
     <br/>
-    <form:errors path="lake" />
-    Lake <form:input path="lake"/>
+    Port Name
     <br/>
-    <form:errors path="price" />
+    <form:input path="portName"/>
+    <br/>
+    <form:errors path="lake"  class="error"/>
+    <br/>
+    Lake
+    <br/>
+    <form:input path="lake"/>
+    <br/>
+    <form:errors path="price" class="error"/>
+    <br/>
     Booking price for one space
-    <form:input path="price"/>
     <br/>
-    <form:errors path="space" />
+    <form:input path="price" id="priceNoCommas"/>
+    <br/>
+    <form:errors path="space" class="error"/>
+    <br/>
     Available space for booking
+    <br/>
     <form:select path="space">
     <form:options items="${spaceToChoose}"/>
     </form:select>
     <br/>
-    <form:errors path="description" />
+    <form:errors path="description" class="error"/>
+    <br/>
     Port Description
     <br/>
      <form:textarea rows="4" cols="15" path="description"/>
@@ -49,6 +60,6 @@
     <form:input path="portOwner" value="${owner.id}" type="hidden"/>
     <form:input id="markerPositionLat" path="markerPositionLat" value="" readonly="true" type="hidden"/>
     <form:input id="markerPositionLng" path="markerPositionLng" value="" readonly="true" type="hidden"/>
-    <input type="submit" value="Save"/>
+    <input type="submit" value="Save" id="saveForm"/>
 </form:form>
 </body>

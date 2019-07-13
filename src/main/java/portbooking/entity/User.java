@@ -1,11 +1,11 @@
 package portbooking.entity;
 
 
+import org.hibernate.validator.constraints.NotBlank;
 import portbooking.authentication.UniqueEmailUser;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,19 +19,18 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
 	@Size(min = 2, max = 30)
 	private String firstName;
 
-	@NotNull
 	@Size(min = 2, max = 30)
 	private String lastName;
 
 	@UniqueEmailUser
 	@Email
+	@NotBlank
 	private String email;
 
-	@NotNull
+	@NotBlank
 	private String password;
 
 	private LocalDateTime createdOn;

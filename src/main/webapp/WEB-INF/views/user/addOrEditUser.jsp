@@ -10,17 +10,29 @@
 <button onclick="goBack()">Go Back</button>
 <br/>
 <form:form method="post" modelAttribute="user" class="login">
-    <form:errors path="firstName" />
-    First Name <form:input path="firstName"/>
+    <form:errors path="firstName" class="error"/>
     <br/>
-    <form:errors path="lastName" />
-    Last Name <form:input path="lastName"/>
+    First Name
     <br/>
-    <form:errors path="email" />
-    Email <form:input path="email"/>
+    <form:input path="firstName"/>
     <br/>
-    <form:errors path="password" />
-    Password <form:password path="password"/>
+    <form:errors path="lastName" class="error"/>
+    <br/>
+    Last Name
+    <br/>
+    <form:input path="lastName"/>
+    <br/>
+    <form:errors path="email" class="error"/>
+    <br/>
+    Email
+    <br/>
+    <form:input path="email"/>
+    <br/>
+    <form:errors path="password" class="error"/>
+    <br/>
+    Password
+    <br/>
+    <form:password path="password"/>
     <br/>
     <input type="submit" value="Save"/>
 </form:form>

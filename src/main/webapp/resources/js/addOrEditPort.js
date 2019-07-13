@@ -5,6 +5,11 @@ $(document).ready(function () {
         window.history.back()
     });
 
+    $("#priceNoCommas").focusout(function(){
+        $(this).val($(this).val().toString().replace(',', '.'));
+    });
+
+
     var mymap = L.map('mapid').setView([53.931837, 21.706238], 9);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
         maxZoom: 18,
@@ -27,6 +32,6 @@ $(document).ready(function () {
         var markerPositionLng = $("#markerPositionLng");
         markerPositionLng.attr("value", e.latlng.lng);
     }
-    mymap.on('click', onMapClick);
+    mymap.on('click', onMapClick)
 
 });

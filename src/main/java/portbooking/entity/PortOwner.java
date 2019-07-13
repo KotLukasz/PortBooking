@@ -1,6 +1,7 @@
 package portbooking.entity;
 
 
+import org.hibernate.validator.constraints.NotBlank;
 import portbooking.authentication.UniqueEmailPortOwner;
 
 
@@ -31,9 +32,10 @@ public class PortOwner {
 
 	@UniqueEmailPortOwner
 	@Email
+	@NotBlank
 	private String email;
 
-	@NotNull
+	@NotBlank
 	private String password;
 
 	private LocalDateTime createdOn;
